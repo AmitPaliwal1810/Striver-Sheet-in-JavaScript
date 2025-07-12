@@ -1,1 +1,1 @@
-# LeetCode
+# Striver leetcode in JavaScript
