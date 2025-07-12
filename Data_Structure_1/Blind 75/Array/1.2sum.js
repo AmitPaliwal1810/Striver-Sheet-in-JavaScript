@@ -37,13 +37,11 @@ function twoSum(nums, target) {
     const completement = target - nums[i];
 
     if (idxMap.has(completement)) {
-       [idxMap.get(completement), i];
+       return [idxMap.get(completement), i];
     }
 
     idxMap.set(nums[i], i);
   }
-
-  console.log(idxMap)
 }
 
 let nums = [2, 7, 11, 15];
