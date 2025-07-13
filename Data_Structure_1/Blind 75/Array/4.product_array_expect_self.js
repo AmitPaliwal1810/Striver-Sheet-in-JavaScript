@@ -25,24 +25,23 @@ The input is generated such that answer[i] is guaranteed to fit in a 32-bit inte
 */
 
 function productExceptSelf(nums) {
-  const n = nums.length;
-  const result = new Array(n).fill(1);
+  let size = nums.length;
+  let resultArray = new Array(size).fill(1);
 
-  // 1️⃣ prefix products
   let prefix = 1;
-  for (let i = 0; i < n; i++) {
-    result[i] = prefix;      // product of everything to the left of i
-    prefix *= nums[i];
-  }
-
-  // 2️⃣ suffix products
   let suffix = 1;
-  for (let i = n - 1; i >= 0; i--) {
-    result[i] *= suffix;     // multiply by product of everything to the right
-    suffix *= nums[i];
+
+  for (let i = 0; i < size; i++) {
+    resultArray[i] = prefix;
+    prefix = prefix * nums[i];
   }
 
-  return result;
+  for (let i = size - 1; i >= 0; i--) {
+    resultArray[i] = resultArray[i] * suffix;
+    suffix = suffix * nums[i];
+  }
+
+  return resultArray;
 }
 
 const nums = [-1, 1, 0, -3, 3];
