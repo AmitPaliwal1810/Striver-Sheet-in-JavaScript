@@ -54,4 +54,3 @@ function hammingWeight(n) {
 
 let value = hammingWeight(2147483645);
 console.log(value);
-
