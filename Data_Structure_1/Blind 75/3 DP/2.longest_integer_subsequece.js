@@ -28,35 +28,56 @@ Constraints:
 
 */
 
-var lengthOfLIS = function(nums) {
-    const res = [];
+// DP solution with TC: o (n ^ 2)
 
-    const binarySearch = (arr, target) => {
-        let left = 0;
-        let right = arr.length - 1;
+var LISdp = function (nums) {
+  let len = nums.length;
+  let dp = new Array(len).fill(1);
 
-        while (left <= right) {
-            const mid = Math.floor((left + right) / 2);
-            if (arr[mid] === target) {
-                return mid;
-            } else if (arr[mid] > target) {
-                right = mid - 1;
-            } else {
-                left = mid + 1;
-            }
-        }
-
-        return left;
-    };
-
-    for (const n of nums) {
-        if (!res.length || res[res.length - 1] < n) {
-            res.push(n);
-        } else {
-            const idx = binarySearch(res, n);
-            res[idx] = n;
-        }
+  for (let i = 1; i < len; i++) {
+    for (let j = 0; j < i; j++) {
+      if (nums[j] < nums[i]) {
+        dp[i] = Math.max(dp[i], dp[j] + 1);
+      }
     }
+  }
 
-    return res.length;    
+  return Math.max(...dp);
 };
+
+console.log(LISdp([10, 9, 2, 5, 3, 7, 101, 18]));
+
+// most optimize solution TC: log n
+
+// var lengthOfLIS = function(nums) {
+//     const res = [];
+
+//     const binarySearch = (arr, target) => {
+//         let left = 0;
+//         let right = arr.length - 1;
+
+//         while (left <= right) {
+//             const mid = Math.floor((left + right) / 2);
+//             if (arr[mid] === target) {
+//                 return mid;
+//             } else if (arr[mid] > target) {
+//                 right = mid - 1;
+//             } else {
+//                 left = mid + 1;
+//             }
+//         }
+
+//         return left;
+//     };
+
+//     for (const n of nums) {
+//         if (!res.length || res[res.length - 1] < n) {
+//             res.push(n);
+//         } else {
+//             const idx = binarySearch(res, n);
+//             res[idx] = n;
+//         }
+//     }
+
+//     return res.length;
+// };
