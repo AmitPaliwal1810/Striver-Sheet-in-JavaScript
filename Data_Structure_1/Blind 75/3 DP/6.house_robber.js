@@ -41,3 +41,5 @@ var rob = function (nums) {
 
   return total_loot[nums.length - 1];
 };
+
+
